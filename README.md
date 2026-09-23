@@ -44,8 +44,8 @@ A simple full-stack user management application built with **React, Express.js, 
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd <project-folder>
+git clone [<your-repository-url>](https://github.com/Pranav00076/prisma-react-backend-prac)
+cd prisma-react-backend-prac
 ```
 
 ### 2. Install dependencies
