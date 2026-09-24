@@ -7,7 +7,7 @@ A simple full-stack user management application built with **React, Express.js, 
 
 - View all users
 - Create a new user
-- Update an existing user (Backend)
+- Update an existing user
 - Delete a user
 - REST API with Express.js
 - Database operations using Prisma ORM
