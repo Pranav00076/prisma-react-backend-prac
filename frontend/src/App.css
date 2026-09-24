@@ -114,7 +114,7 @@ input {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
 
@@ -123,7 +123,8 @@ input {
 ========================= */
 
 .createUser,
-.deleteuser {
+.deleteuser,
+.updateUser {
   background: #171a23;
   border: 1px solid #292d38;
   border-radius: 18px;
@@ -132,7 +133,8 @@ input {
 }
 
 .createUser h1,
-.deleteuser h1 {
+.deleteuser h1,
+.updateUser h1 {
   font-size: 23px;
   margin-bottom: 25px;
   color: #ffffff;
@@ -152,7 +154,7 @@ input {
 #createBox > div {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 label {
@@ -193,6 +195,20 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+/* =========================
+   Delete updateBox
+========================= */
+
+#updatebox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#updatebox > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 
