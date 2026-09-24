@@ -7,7 +7,7 @@ A simple full-stack user management application built with **React, Express.js, 
 
 - View all users
 - Create a new user
-- Update an existing user
+- Update an existing user (Backend)
 - Delete a user
 - REST API with Express.js
 - Database operations using Prisma ORM
@@ -44,8 +44,8 @@ A simple full-stack user management application built with **React, Express.js, 
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd <project-folder>
+git clone https://github.com/Pranav00076/prisma-react-backend-prac
+cd prisma-react-backend-prac
 ```
 
 ### 2. Install dependencies
