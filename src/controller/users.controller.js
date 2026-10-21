@@ -5,6 +5,14 @@ async function getAll() {
     return users
 }
 
+async function getUser(id) {
+    const user = await prisma.user.findFirst({
+        where : {id : Number(id)}
+    })
+
+    return user
+}
+
 async function createUser(name, email) {
     const user = await prisma.user.create({
         data: {
@@ -14,6 +22,7 @@ async function createUser(name, email) {
     });
     return user
 }
+
 async function putUser(id,name,email) {
     const changesInUser = await prisma.user.update({
         where : { id : Number(id) },
@@ -35,4 +44,4 @@ async function deleteUser(id) {
     }
 }
 
-export {getAll, createUser, putUser, deleteUser};
+export {getAll, createUser, putUser, deleteUser, getUser};

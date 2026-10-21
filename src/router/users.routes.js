@@ -1,10 +1,16 @@
 import express from "express";
-import {getAll, createUser, putUser, deleteUser} from "../controller/controller.js"
+import {getAll, createUser, putUser, deleteUser, getUser} from "../controller/users.controller.js"
 
 const router = express.Router();
 
 router.get("/", async (req,res) => {
     let users = await getAll()
+    res.json(users)
+})
+
+router.get("/:id", async (req,res) => {
+    let id = Number(req.params.id)
+    let users = await getUser(id)
     res.json(users)
 })
 
