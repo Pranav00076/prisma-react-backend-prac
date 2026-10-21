@@ -1,47 +1,41 @@
-import prisma from "../database/prisma.js"
+import {getAll, createUser, putUser, deleteUser, getUser} from "../services/users.service.js"
 
-async function getAll() {
-    const users = await prisma.user.findMany();
-    return users
+const list = async (req,res) => {
+    let users = await getAll()
+    res.json(users)
 }
 
-async function getUser(id) {
-    const user = await prisma.user.findFirst({
-        where : {id : Number(id)}
-    })
-
-    return user
+const getOne = async (req,res) => {
+    let id = Number(req.params.id)
+    let users = await getUser(id)
+    res.json(users)
 }
 
-async function createUser(name, email) {
-    const user = await prisma.user.create({
-        data: {
-            name: name,
-            email: email
-        }
-    });
-    return user
+const create = async (req,res) => {
+    const {name, email} = req.body;
+
+    let user = await createUser(name, email);
+
+    res.status(201).json(user)
 }
 
-async function putUser(id,name,email) {
-    const changesInUser = await prisma.user.update({
-        where : { id : Number(id) },
-        data : {
-            name: name,
-            email: email
-        }
-    })
-    return changesInUser
+const update = async (req,res) => {
+    const id = req.params.id;
+
+    const {name, email} = req.body;
+
+    let changesInUser = await putUser(id, name, email)
+
+    res.status(203).json(changesInUser)
 }
 
-async function deleteUser(id) {
-    try{
-        const deleteduser = await prisma.user.delete({
-            where : {id : Number(id)}
-        })
-    } catch (err) {
+const remove = async (req,res) => {
+    const id = req.params.id;
 
-    }
+    let data = await deleteUser(id)
+
+    res.status(204).send()
 }
 
-export {getAll, createUser, putUser, deleteUser, getUser};
+export {list, getOne, create, update, remove}
+

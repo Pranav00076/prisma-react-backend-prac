@@ -1,53 +1,48 @@
-import prisma from "../database/prisma.js"
+import {getAllPost, createPost, getPost, putPost, deletePost} from "../services/posts.service.js"
 
-async function getAllPost() {
-    const posts = await prisma.post.findMany();
-    return posts
-}
-
-async function getPost(id) {
-    const post = await prisma.post.findFirst({
-        where : {id : Number(id)}
-    })
-
-    return post
-}
-
-
-async function createPost(title, content, published, authorId) {
-    const post = await prisma.post.create({
-        data: {
-            title: title,
-            content: content,
-            published : published,
-            authorId : authorId
-        }
-    });
-    return post
-}
-
-async function putPost(id,title, content, published, authorId) {
-    const changesInPost = await prisma.post.update({
-        where : { id : Number(id) },
-        data : {
-            title: title,
-            content: content,
-            published : published,
-            authorId : authorId
-        }
-    })
-    return changesInPost
-}
-
-async function deletePost(id) {
+const list = async (req,res) => {
     try{
-        const deletedPost = await prisma.post.delete({
-            where : {id : Number(id)}
-        })
+        let posts = getAllPost()
+        res.json(posts)
     } catch (err) {
-
+        console.log(err)
     }
 }
 
+const getOne = async (req,res) => {
+    let id = Number(req.params.id)
+    let users = await getPost(id)
+    res.json(users)
+}
 
-export {getAllPost, createPost, getPost, putPost, deletePost}
+const create = async (req,res) => {
+    try{
+        const {title, content, published, authorId} = req.body;
+
+        let post = await createPost(title, content, published, authorId);
+
+        res.status(201).json(post)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const update = async (req,res) => {
+    const id = req.params.id;
+
+    const {title, content, published, authorId} = req.body;
+
+    let changesInPost = await putPost(id,title, content, published, authorId)
+
+    res.status(203).json(changesInPost)
+}
+
+const remove = async (req,res) => {
+    const id = req.params.id;
+
+    let data = await deletePost(id)
+
+    res.status(204).send()
+}
+
+export {list, getOne, create, update, remove}
